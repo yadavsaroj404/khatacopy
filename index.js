@@ -5,12 +5,6 @@ const config = require('dotenv').config()
 const userRoutes = require("./routes/user");
 const expensesRoutes = require("./routes/expenses");
 
-const path = require("path")
-const data1 = require(path.join(process.cwd(), "tmp", "Users.json"));
-const data2 = require(path.join(process.cwd(), "tmp", "Labels.json"));
-const data3 = require(path.join(process.cwd(), "tmp", "Expenses.json"));
-console.log(typeof(data1), typeof(data2), typeof(data3));
-
 const app = express();
 
 app.use((req, res, next) => {
@@ -45,5 +39,8 @@ app.use((err, req, res, next) => {
   const data = err.data || [];
   res.status(statusCode).json({ message, data });
 });  
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, ()=>console.log(`Server is running on port ${PORT}`));
 
 module.exports = app;
